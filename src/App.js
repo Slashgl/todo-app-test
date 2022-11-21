@@ -1,10 +1,10 @@
-import './App.css';
+import React from "react";
+import Todo from "./components/todo";
+
 
 function App() {
   return (
-    <div className="App">
-     Hello
-    </div>
+    <Todo/>
   );
 }
 
