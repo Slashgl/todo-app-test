@@ -42,9 +42,10 @@
   top: 50%;
   right: 10px;
   width: 30px;
-  height: 30px;
+  height: 2px;
   background-color: red;
-  transform: translateY(-50%);
+  transform: translateY(-50%) rotateX(-45deg);
+
 }
 
 .images {

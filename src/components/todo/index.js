@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from "react";
+import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import dayjs from "dayjs";
 import {useDispatch} from "react-redux";
 import {db} from "../../services/firebase";
@@ -63,10 +66,12 @@ const Todo = () => {
                         <div className={styles.name}>{todo?.title}</div>
                         <div className={styles.description}>{todo?.description}</div>
                         <div className={styles.date}>{todo.date}</div>
-                        <div className={styles.delete} onClick={(e) => {
+                        <IconButton aria-label="delete" size="large" style={{position: "absolute", right: 0, top: 0}} onClick={(e) => {
                             e.stopPropagation()
                             deleteDoc(doc(db, 'todos', todo.id))
-                        }}></div>
+                        }}>
+                            <DeleteIcon fontSize="inherit" />
+                        </IconButton>
                     </li>
                 ))}
             </ul>
