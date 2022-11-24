@@ -9,8 +9,6 @@ import ModalCreateTodo from "../modalCreateTodo";
 import ModalUpdateTodo from "../modalUpdateTodo";
 import styles from './styles.module.scss';
 
-
-
 const Todo = () => {
     const dispatch = useDispatch();
     const [isActiveModal, setIsActiveModal] = useState(false);
@@ -18,14 +16,18 @@ const Todo = () => {
     const [activeTodo, setActiveTodo] = useState(null);
     const todos = GetTodos();
 
-
+    // Првоерка истекло ли отведённое время на задачу
     const checkedTimeIsUp = (timestamp) => {
         const now = +dayjs()
         const time = new Date(timestamp).getTime()
         return now > time
     }
 
+    const checkingForTimeOut = (todo) => {
+        return checkedTimeIsUp(todo.date) ? styles.failed : styles.todo
+    }
 
+    // Достаём данные из бд и записываем из в store
     const setDataInArray = () => {
         const q = query(collection(db, 'todos'))
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -38,13 +40,11 @@ const Todo = () => {
         return () => unsubscribe()
     }
 
+    // Проверка на открыто ли модалка
+    // Установка активного туду
     const handleClickTodo = (todo) => {
         setIsActiveModalEdit(true)
         setActiveTodo(todo.id)
-    }
-
-    const checkingForTimeOut = (todo) => {
-        return checkedTimeIsUp(todo.date) ? styles.failed : styles.todo
     }
 
     useEffect(() => {

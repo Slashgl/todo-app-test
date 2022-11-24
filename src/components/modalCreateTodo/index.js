@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {addDoc, collection} from 'firebase/firestore';
 import {db, storage} from "../../services/firebase";
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
@@ -11,12 +11,14 @@ const ModalCreateTodo = ({setIsActiveModal}) => {
     const [imageUpload, setImageUpload] = useState();
     const {register, handleSubmit} = useForm();
 
+    // Получаем нулевую картинку которую загрузили и записываем в стейт её объект
     const handleImageChange = (e) => {
         if (e.target.files[0]) {
             setImageUpload(e.target.files[0])
         }
     }
 
+    // Создаём ссылку на эту картинку и записывает все данные в бд
     const createUrlImages = async (data) => {
         if (imageUpload == null) return;
         const imageRef = ref(storage, `image${v4()}`);
@@ -34,9 +36,6 @@ const ModalCreateTodo = ({setIsActiveModal}) => {
         createUrlImages(data);
         setIsActiveModal(false);
     }
-
-    useEffect(() => {
-    }, [])
 
     return (
         <div className={styles.wrapper} onClick={() => setIsActiveModal(false)}>

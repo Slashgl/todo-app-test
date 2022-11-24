@@ -9,8 +9,8 @@ import styles from './styles.module.scss';
 const ModalUpdateTodo = ({setIsActiveModalEdit, activeTodo}) => {
     const {register, handleSubmit} = useForm();
     const todos = GetTodos()
-    console.log(todos)
 
+    // Обеовляем данные в title
     const onSubmit = async (data) => {
         todos.map(todo => {
             if(todo.id === activeTodo) {
@@ -22,6 +22,7 @@ const ModalUpdateTodo = ({setIsActiveModalEdit, activeTodo}) => {
         setIsActiveModalEdit(false)
     }
 
+    // Позвоялем изменять поле checked в зависимости от нажатия пользователя
     const checkedTodo = () => {
        todos.map(todo => {
            if(todo.id === activeTodo) {
