@@ -1,13 +1,5 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
+import store from "./Store";
+import {todosReducer, setTodos} from "./reducers/setTodo";
+import {GetTodos} from "./selectors/setTodo";
 
-const rootReducer = combineReducers({
-
-});
-
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
-
-// Используется для debug, удалить при окончании разработки
-window.storage = store;
-
-export default store;
+export {store, todosReducer, setTodos, GetTodos}
